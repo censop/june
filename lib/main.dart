@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:june/Screens/home_page.dart';
-import 'package:june/Theme/my_theme.dart';
+import 'package:june/Widgets/Screens/home_page.dart';
+import 'package:june/Widgets/Theme/my_theme.dart';
+import 'package:june/routes.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "June",
       navigatorObservers: [routeObserver],
-      home: HomePage(),
+      home: HomePage(), //placeholder until sign in implemented
+      routes: {
+        Routes.homePage : (context) => HomePage(),
+      },
       theme: MyTheme.lightTheme,
     );
   }
