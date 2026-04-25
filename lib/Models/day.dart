@@ -1,51 +1,64 @@
+import 'dart:ffi';
+
 import 'package:june/Models/task.dart';
 
-enum DayOfWeek {
-  monday('Mon'),
-  tuesday('Tue'),
-  wednesday('Wed'),
-  thursday('Thu'),
-  friday('Fri'),
-  saturday('Sat'),
-  sunday('Sun');
+class Day {
+  final DateTime date;
+  final List<Task> tasks; 
 
-  final String shortName;
-  const DayOfWeek(this.shortName);
-}
-
-class DayModel {
-  final DayOfWeek dayName;
-  final List<Task> tasks;
-
-  DayModel({
-    required this.dayName,
+  Day({
+    required this.date,
     this.tasks = const [], 
   });
 
-  DayModel copyWith({
-    DayOfWeek? dayName,
+  String get dayNumber => date.day.toString();
+
+  String get shortName {
+    switch (date.weekday) {
+      case DateTime.monday: return 'MON';
+      case DateTime.tuesday: return 'TUE';
+      case DateTime.wednesday: return 'WED';
+      case DateTime.thursday: return 'THU';
+      case DateTime.friday: return 'FRI';
+      case DateTime.saturday: return 'SAT';
+      case DateTime.sunday: return 'SUN';
+      default: return '';
+    }
+  }
+
+  String get longName {
+    switch (date.weekday) {
+      case DateTime.monday: return 'Monday';
+      case DateTime.tuesday: return 'Tuesday';
+      case DateTime.wednesday: return 'Wednesday';
+      case DateTime.thursday: return 'Thursday';
+      case DateTime.friday: return 'Friday';
+      case DateTime.saturday: return 'Saturday';
+      case DateTime.sunday: return 'Sunday';
+      default: return '';
+    }
+  }
+
+  Day copyWith({
+    DateTime? date,
     List<Task>? tasks,
   }) {
-    return DayModel(
-      dayName: dayName ?? this.dayName,
+    return Day(
+      date: date ?? this.date,
       tasks: tasks ?? this.tasks,
     );
   }
 
-
   Map<String, dynamic> toMap() {
     return {
-      'dayName': dayName.name, 
+      'date': date.toIso8601String(), 
       'tasks': tasks.map((task) => task.toMap()).toList(),
     };
   }
 
-  factory DayModel.fromMap(Map<String, dynamic> map) {
-    return DayModel(
-      dayName: DayOfWeek.values.firstWhere(
-        (e) => e.name == map['dayName'],
-        orElse: () => DayOfWeek.monday, 
-      ),
+  factory Day.fromMap(Map<String, dynamic> map) {
+    return Day(
+      date: DateTime.parse(map['date']),
       tasks: List<Task>.from(
         (map['tasks'] ?? []).map((taskMap) => Task.fromMap(taskMap)),
       ),
