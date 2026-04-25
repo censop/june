@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DayCard extends StatefulWidget {
-  const DayCard({super.key});
+  const DayCard({
+    super.key,
+    //required this.day,
+    //required
+  });
 
   @override
   State<DayCard> createState() => _DayCardState();
@@ -24,11 +28,6 @@ class _DayCardState extends State<DayCard> {
         child: Row(
           mainAxisSize: MainAxisSize.max ,
           children: [
-            Checkbox(
-              value: false, 
-              shape: CircleBorder(),
-              onChanged: (_) {}
-            ),
             Column(
               mainAxisSize: MainAxisSize.min ,
               children: [

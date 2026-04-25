@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:june/Models/task.dart';
+import 'package:june/Utils/format_utils.dart';
 
 class TaskCard extends StatefulWidget {
   const TaskCard({
     super.key,
-    required this.taskName,
-    required this.startTime,
-    required this.endTime,
-    this.description //not necessary
+    required this.task
   });
 
-  final String taskName;
-  final String startTime;
-  final String endTime;
-  final String? description;
+  final Task task;
 
   @override
   State<TaskCard> createState() => _TaskCardState();
@@ -44,9 +40,18 @@ class _TaskCardState extends State<TaskCard> {
             Column(
               mainAxisSize: MainAxisSize.min ,
               children: [
-                Text("${widget.startTime} - ${widget.endTime}"),
-                Text("${widget.taskName}"),
-                Text("${widget.description}"),
+                Text(
+                  "${FormatUtils.timeOfDayToString(widget.task.startTime)} - ${FormatUtils.timeOfDayToString(widget.task.endTime)}",
+                  textAlign: TextAlign.start,
+                ),
+                Text(
+                  "${widget.task.taskName}",
+                  textAlign: TextAlign.start,
+                ),
+                Text(
+                  "${widget.task.description}",
+                  textAlign: TextAlign.start,
+                ),
               ],
             )
           ],

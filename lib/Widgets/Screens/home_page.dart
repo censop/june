@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:june/Models/task.dart';
 import 'package:june/Widgets/Cards/day_card.dart';
 import 'package:june/Widgets/Cards/task_card.dart';
 
@@ -45,16 +46,15 @@ class _HomePageState extends State<HomePage> {
           children:[
             Text("Good Morning, CANSU\nReady to conquer the day?"),
             SizedBox(height: 16,),
-            TaskCard( //placeholder until backend implemented
-              taskName: "Study Block", 
-              startTime: "11.30", 
-              endTime: "15.30", 
-              description: "This is a test",
-            ),
+            TaskCard(task: dummyTask,),
             DayCard(),
           ] 
         ),
       ),
     );
   }
+
+
+  //DUMMY TASK FOR TEST 
+  Task dummyTask = Task(taskName: "Study block", description: "Tessst", startTime: TimeOfDay(hour: 11, minute: 30), endTime: TimeOfDay(hour: 15, minute: 30));
 }
