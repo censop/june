@@ -5,7 +5,7 @@ import 'package:june/routes.dart';
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-void main() {
+void main() {      
   runApp(const MyApp());
 }
 
