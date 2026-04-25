@@ -19,8 +19,70 @@ class MyTheme {
     onSurface: neutralColor,
   );
 
+  static final TextTheme textTheme = TextTheme(
+    
+    // Major Page Headers (e.g., "Good morning, Julian.")
+    headlineMedium: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 28.0,
+      fontWeight: FontWeight.w300, // Light
+      letterSpacing: -0.5, // tracking-tight
+    ),
+
+    // App Bar Titles / Important Names (e.g., "Beliz")
+    titleLarge: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 18.0,
+      fontWeight: FontWeight.w600, // Semi-bold
+      letterSpacing: -0.5,
+    ),
+
+    // Standard List Items / Task Names (e.g., "Client alignment call")
+    titleMedium: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400, // Normal
+    ),
+
+    // Standard Body Text
+    bodyMedium: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 14.0,
+      fontWeight: FontWeight.w400, // Normal
+    ),
+
+    // Section Headers (e.g., "CURRENT FOCUS", "UPCOMING")
+    labelLarge: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 12.0, // text-xs
+      fontWeight: FontWeight.w600, // Semi-bold
+      letterSpacing: 2.0, // tracking-[0.2em]
+      // Note: Use .toUpperCase() on the Text widget itself for uppercase
+    ),
+
+    // Time blocks & Nav Items (e.g., "09:00 — 11:00", "Tasks")
+    labelMedium: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 11.0, 
+      fontWeight: FontWeight.w500, // Medium
+      letterSpacing: 1.0, // tracking-wider
+    ),
+
+    // Tiny Tags & Badges (e.g., "3 LEFT", "FRI")
+    labelSmall: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 10.0,
+      fontWeight: FontWeight.w700, // Bold
+    ),
+  ).apply(
+    // This ensures all text defaults to your neutral dark color
+    bodyColor: neutralColor,
+    displayColor: neutralColor,
+  );
+
   static ThemeData lightTheme = ThemeData(
     fontFamily: interFont,
-    colorScheme: lightScheme
+    colorScheme: lightScheme,
+    textTheme: textTheme,
   );
 }

@@ -14,8 +14,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar( //can make it a seperate widget
         title: Text("June Logo Placeholder"),
+        backgroundColor: Colors.white,
         elevation: 3,
         shadowColor: Colors.black.withAlpha(30), 
         surfaceTintColor: Colors.transparent, 
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize:  MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,

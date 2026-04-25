@@ -15,45 +15,51 @@ class TaskCard extends StatefulWidget {
 }
 
 class _TaskCardState extends State<TaskCard> {
+
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16),
+      color: Colors.white,
+      elevation: 0.7,
+      shadowColor: Theme.of(context).colorScheme.primary.withAlpha(100),
       shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.onSurface,
-          width: 0.5,         
-        ),
-        borderRadius: BorderRadius.circular(16.0), 
+        borderRadius: BorderRadius.circular(16), 
       ),
-      color: Theme.of(context).scaffoldBackgroundColor,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(16,24,16,24),
         child: Row(
           mainAxisSize: MainAxisSize.max ,
           children: [
-            Checkbox(
-              value: false, 
-              shape: CircleBorder(),
-              onChanged: (_) {}
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.task.taskName,
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Text(
+                    "${FormatUtils.timeOfDayToString(widget.task.startTime)} - ${FormatUtils.timeOfDayToString(widget.task.endTime)}",
+                    textAlign: TextAlign.start,
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface.withAlpha(150)
+                    ),
+                  ),
+                ],
+              ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min ,
-              children: [
-                Text(
-                  "${FormatUtils.timeOfDayToString(widget.task.startTime)} - ${FormatUtils.timeOfDayToString(widget.task.endTime)}",
-                  textAlign: TextAlign.start,
-                ),
-                Text(
-                  "${widget.task.taskName}",
-                  textAlign: TextAlign.start,
-                ),
-                Text(
-                  "${widget.task.description}",
-                  textAlign: TextAlign.start,
-                ),
-              ],
-            )
+            Checkbox(
+              value: widget.task.isCompleted, 
+              shape: CircleBorder(),
+              onChanged: (isChanged) {
+              },
+              side: BorderSide(
+                width: 0.7,
+                color:Theme.of(context).colorScheme.onSurface.withAlpha(100) 
+              ),
+            ),
           ],
         ),
       ),
