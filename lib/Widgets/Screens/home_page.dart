@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:june/Models/day.dart';
 import 'package:june/Models/task.dart';
+import 'package:june/Widgets/Buttons/custom_elevated_button.dart';
 import 'package:june/Widgets/Cards/day_card.dart';
 import 'package:june/Widgets/Cards/task_card.dart';
+import 'package:june/Widgets/Form/custom_text_form_field.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,9 +50,15 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Text("Good Morning, CANSU\nReady to conquer the day?"),
+            Text("Good Morning, CANSU\nReady to conquer the day?"),
             SizedBox(height: 16,),
             TaskCard(task: dummyTask,),
-            DayCard(day: day)
+            DayCard(day: day),
+            CustomTextFormField(),
+            CustomElevatedButton(
+              onPressed: () {}, 
+              child: Text("lala")
+            )
           ] 
         ),
       ),
