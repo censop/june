@@ -44,6 +44,14 @@ class MyTheme {
       fontWeight: FontWeight.w400, // Normal
     ),
 
+    // Headline Subtitles (e.g., "FRIDAY, JULY 12")
+    titleSmall: const TextStyle(
+      fontFamily: interFont,
+      fontSize: 14.0, // text-sm
+      fontWeight: FontWeight.w500, // font-medium
+      letterSpacing: 1.5, // tracking-widest
+    ),
+
     // Standard Body Text
     bodyMedium: const TextStyle(
       fontFamily: interFont,

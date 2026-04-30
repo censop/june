@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:june/Models/day.dart';
 import 'package:june/Models/task.dart';
-import 'package:june/Widgets/Buttons/custom_elevated_button.dart';
+import 'package:june/Widgets/Buttons/custom_primary_elevated_button.dart';
 import 'package:june/Widgets/Cards/day_card.dart';
 import 'package:june/Widgets/Cards/task_card.dart';
 import 'package:june/Widgets/Form/custom_text_form_field.dart';
@@ -50,7 +50,16 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
-            Text("Good Morning, CANSU\nReady to conquer the day?"),
+            Text(
+              "Good Morning, CANSU",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text( //will not be like this when database is loaded
+              "Friday, June 12",
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: Theme.of(context).colorScheme.onSurface.withAlpha(100)
+              ),
+            ),
             SizedBox(height: 16,),
             TaskCard(task: dummyTask,),
             DayCard(day: day),
@@ -59,7 +68,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context).pushNamed(Routes.signUpPage);
               }, 
-              child: Text("lala")
+              text: "lala"
             )
           ] 
         ),

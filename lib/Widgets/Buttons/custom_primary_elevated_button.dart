@@ -5,11 +5,11 @@ class CustomElevatedButton extends StatefulWidget {
   const CustomElevatedButton({
     super.key,
     required this.onPressed,
-    required this.child,
+    required this.text,
   });
 
   final Function()? onPressed;
-  final Widget? child;
+  final String text;
 
 
   @override
@@ -24,9 +24,15 @@ class _CustomElevatedButtonState extends State<CustomElevatedButton> {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(16)
-        )
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary
       ),
-      child: widget.child,
+      child: Text(
+        widget.text,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onPrimary
+        ),
+      )
     );
   }
 }

@@ -17,4 +17,14 @@ class FormatUtils {
     final String m = time.minute.toString().padLeft(2, '0');
     return '$h:$m';
   }
+
+  static String getTodayForDatabase() {
+    final now = DateTime.now();
+    final String y = now.year.toString();
+    final String m = now.month.toString().padLeft(2, '0');
+    final String d = now.day.toString().padLeft(2, '0');
+    
+    return '$y-$m-$d';
+  }
+  
 }
