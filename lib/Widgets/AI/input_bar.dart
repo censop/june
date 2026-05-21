@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:june/Widgets/Theme/my_theme.dart';
 
 class InputBar extends StatelessWidget {
-  const InputBar({super.key});
+  final TextEditingController controller;
+  final VoidCallback onSend;
+  final bool enabled;
+
+  const InputBar({
+    super.key,
+    required this.controller,
+    required this.onSend,
+    this.enabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +30,8 @@ class InputBar extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: MyTheme.spaceMd,
               right: 52,
-              top: MyTheme.spaceMd,
-              bottom: MyTheme.spaceMd,
+              top: MyTheme.spaceSm + 4,
+              bottom: MyTheme.spaceSm + 4,
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(MyTheme.radiusXl),
@@ -30,28 +39,40 @@ class InputBar extends StatelessWidget {
                 color: MyTheme.outlineVariantColor.withValues(alpha: 0.6),
               ),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Dump your tasks here...',
-                    style: tt.bodyMedium?.copyWith(color: MyTheme.outlineColor),
-                  ),
-                ),
-                Icon(Icons.mic_none_rounded, size: 24, color: MyTheme.outlineColor),
-              ],
+            child: TextField(
+              controller: controller,
+              enabled: enabled,
+              style: tt.bodyMedium?.copyWith(color: MyTheme.onSurfaceColor),
+              maxLines: null,
+              textInputAction: TextInputAction.send,
+              onSubmitted: (_) => onSend(),
+              decoration: InputDecoration(
+                isDense: true,
+                border: InputBorder.none,
+                hintText: 'Message june...',
+                hintStyle: tt.bodyMedium?.copyWith(color: MyTheme.outlineColor),
+              ),
             ),
           ),
           Positioned(
             right: 8,
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: MyTheme.primaryColor,
-                shape: BoxShape.circle,
+            child: GestureDetector(
+              onTap: enabled ? onSend : null,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: enabled
+                      ? MyTheme.primaryColor
+                      : MyTheme.outlineVariantColor,
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.send_rounded,
+                  color: Colors.white,
+                  size: 18,
+                ),
               ),
-              child: const Icon(Icons.send_rounded, color: Colors.white, size: 18),
             ),
           ),
         ],

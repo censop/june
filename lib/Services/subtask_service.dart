@@ -3,15 +3,17 @@ import 'package:june/main.dart';
 
 class SubtaskService {
   static Future<List<Subtask>> fetchForTask(String taskId) async {
-    final response = await supabase
-        .from('Subtasks')
-        .select()
-        .eq('task_id', taskId)
-        .order('created_at');
+    try {
+      final response = await supabase
+          .from('Subtasks')
+          .select()
+          .eq('task_id', taskId)
+          .order('created_at');
 
-    return (response as List)
-        .map((json) => Subtask.fromJson(json as Map<String, dynamic>))
-        .toList();
+      return response.map((json) => Subtask.fromJson(json)).toList();
+    } catch (e) {
+      throw Exception('Failed to fetch subtasks: $e');
+    }
   }
 
   static Future<void> insert({
@@ -19,26 +21,46 @@ class SubtaskService {
     required String title,
     bool done = false,
   }) async {
-    await supabase.from('Subtasks').insert({
-      'task_id': taskId,
-      'title': title,
-      'done': done,
-    });
+    try {
+      await supabase.from('Subtasks').insert({
+        'task_id': taskId,
+        'title': title,
+        'done': done,
+      });
+    } catch (e) {
+      throw Exception('Failed to insert subtask: $e');
+    }
   }
 
   static Future<void> deleteAllForTask(String taskId) async {
-    await supabase.from('Subtasks').delete().eq('task_id', taskId);
+    try {
+      await supabase.from('Subtasks').delete().eq('task_id', taskId);
+    } catch (e) {
+      throw Exception('Failed to delete subtasks for task: $e');
+    }
   }
 
   static Future<void> updateDone(String id, bool done) async {
-    await supabase.from('Subtasks').update({'done': done}).eq('id', id);
+    try {
+      await supabase.from('Subtasks').update({'done': done}).eq('id', id);
+    } catch (e) {
+      throw Exception('Failed to update subtask done state: $e');
+    }
   }
 
   static Future<void> updateTitle(String id, String title) async {
-    await supabase.from('Subtasks').update({'title': title}).eq('id', id);
+    try {
+      await supabase.from('Subtasks').update({'title': title}).eq('id', id);
+    } catch (e) {
+      throw Exception('Failed to update subtask title: $e');
+    }
   }
 
   static Future<void> delete(String id) async {
-    await supabase.from('Subtasks').delete().eq('id', id);
+    try {
+      await supabase.from('Subtasks').delete().eq('id', id);
+    } catch (e) {
+      throw Exception('Failed to delete subtask: $e');
+    }
   }
 }
