@@ -1,1 +1,0 @@
-enum ImpactLevel { high, low }

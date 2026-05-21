@@ -36,7 +36,7 @@ class _ForgotPasswordCardState extends State<ForgotPasswordCard> {
               title: "Email",
               suffixWidget: GestureDetector(
                 onTap: () {
-                  debugPrint("send reset pass mail pressed");
+                  print("send reset pass mail pressed");
                 }, 
                 child: Icon(
                   Icons.arrow_forward_ios
